@@ -112,9 +112,10 @@ def run_downsample_experiment(dataset, classifiers, tf_idf_params, frac=0.6, sto
     return best_clfs
 
 
-def calc_score_on_dev_after_dim_reduction(clf, X_train, y_train, X_dev, y_dev, n=200, stop_words=None):
+def calc_score_on_dev_after_dim_reduction1(pipe, X_train, y_train, X_dev, y_dev, n=200, stop_words=None):
     # Vectorizer
-    vectorizer = TfidfVectorizer(stop_words=stop_words, max_df=.9)
+    clf = pipe.get_params()['clf']
+    vectorizer = pipe.get_params()['tfidf']
     vectorizer.fit(X_train)
 
     # Dim reduction
@@ -130,7 +131,9 @@ def calc_score_on_dev_after_dim_reduction(clf, X_train, y_train, X_dev, y_dev, n
 
     # Check F1 average accuracy.
     preds = clf.predict(X_dev_projected)
-    return f1_score(y_dev, preds, average='weighted')
+    dev_score = f1_score(y_dev, preds, average='weighted')
+    print(dev_score)
+    return dev_score, clf, pca, vectorizer
 
 
 def grid_search_with_dim_red_one(clf, vectorizer, X_train, y_train, X_dev, y_dev, n=10):
