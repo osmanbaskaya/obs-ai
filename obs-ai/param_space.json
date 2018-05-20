@@ -1,0 +1,63 @@
+{
+    "tf_idf_params": {
+        "tfidf__max_df": [
+            0.8,
+            0.9,
+            1
+        ],
+        "tfidf__ngram_range": [
+            [
+                1,
+                1
+            ],
+            [
+                1,
+                2
+            ]
+        ]
+    },
+    "sgd_params": {
+        "clf__alpha": [
+            0.0001,
+            0.00001,
+            0.000001
+        ],
+        "clf__penalty": [
+            "l2",
+            "elasticnet"
+        ],
+        "clf__max_iter": [
+            500,
+            1000
+        ],
+        "clf__class_weight": [
+            {
+                "order": 0.00254165972785784,
+                "customer": 0.006376395794286681,
+                "shopper": 0.028995153014816054,
+                "applicant": 0.12951168346617836,
+                "misc": 0.8325751079968611
+            },
+            {
+                "customer": 1,
+                "order": 1,
+                "shopper": 1,
+                "misc": 1,
+                "applicant": 1
+            }
+        ]
+    },
+    "random_forest_params": {
+        "clf__n_estimators": [
+            10,
+            30,
+            50,
+            100
+        ],
+        "clf__criterion": [
+            "gini",
+            "entropy"
+        ]
+    }
+}
+
